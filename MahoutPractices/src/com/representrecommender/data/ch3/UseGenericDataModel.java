@@ -2,9 +2,14 @@ package com.representrecommender.data.ch3;
 
 import org.apache.mahout.cf.taste.impl.common.FastByIDMap;
 import org.apache.mahout.cf.taste.impl.common.LongPrimitiveIterator;
+import org.apache.mahout.cf.taste.impl.model.GenericDataModel;
 import org.apache.mahout.cf.taste.impl.model.GenericUserPreferenceArray;
+import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.model.PreferenceArray;
 
+/*
+ * GenericDataModel by using FastByIDMap object
+ */
 public class UseGenericDataModel {
 
 	public static void main(String[] args) {
@@ -52,7 +57,7 @@ public class UseGenericDataModel {
 		map.put(1L, user1Array);
 		map.put(2L, user2Array);
 		
-		System.out.println(map);
+	/*	System.out.println(map);
 		
 		LongPrimitiveIterator iterator=map.keySetIterator();
 		while(iterator.hasNext())
@@ -62,7 +67,14 @@ public class UseGenericDataModel {
 			PreferenceArray out=map.get(key);
 			System.out.println(out);
 		}
-		
+		*/
+		DataModel model =new GenericDataModel(map);
+		System.out.println(model);
+		System.gc();
+		Runtime runtime=Runtime.getRuntime();
+		Long total=runtime.totalMemory();
+		Long free=runtime.freeMemory();
+		System.out.println(total-free);
 		
 	}
 
